@@ -43,8 +43,8 @@ public class Card : MonoBehaviour, IInterectable
     {
         if (_status == 2 && Object.FindFirstObjectByType<UiManager>().StartBattle == true && _invoked == false && InTheTable == true)
         {
-            GameObject character = Data.GameObjectCharacter;
-            character.transform.localScale = new Vector3(1, 1, 1);
+            GameObject character = Data.GameObjectCharacterPlayer;
+            character.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
             Instantiate(character, _spawCharacters);
             Object.FindFirstObjectByType<UiManager>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());
@@ -52,7 +52,7 @@ public class Card : MonoBehaviour, IInterectable
 
         if (_master == 1 && Object.FindFirstObjectByType<UiManager>().StartBattle == true && _invoked == false)
         {
-            GameObject character = Data.GameObjectCharacter;
+            GameObject character = Data.GameObjectCharacterPlayer;
             character.transform.localScale = new Vector3(1f, 1f, 1f);
             Instantiate(character, _spawCharacters);
             Object.FindFirstObjectByType<EnemyManage>().LoseEnergy(Data.Cost);
