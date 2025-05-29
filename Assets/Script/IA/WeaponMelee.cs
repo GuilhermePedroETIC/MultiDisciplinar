@@ -13,14 +13,14 @@ public class WeaponMelee : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != _ignoreTag)
+        if (!other.gameObject.CompareTag(_ignoreTag))
         {
             IDemageble damageable = other.GetComponent<IDemageble>();
 
             if (damageable != null)
             {
                 damageable.TakeDamage(1);
-                _collider.isTrigger = false;
+                //_collider.isTrigger = false;
                 StartCoroutine(TurnOffTrigger());
             }
         }
@@ -28,7 +28,7 @@ public class WeaponMelee : MonoBehaviour
 
     IEnumerator TurnOffTrigger()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         _collider.isTrigger = true;
     }
 }

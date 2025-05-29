@@ -3,7 +3,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     private Rigidbody rb;
-    [SerializeField] private string ignoreLayerName;
+    [SerializeField] private string ignoreTagName;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class Arrow : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != ignoreLayerName)
+        if (!collision.gameObject.CompareTag(ignoreTagName))
         {
             IDemageble damageable = collision.gameObject.GetComponent<IDemageble>();
 

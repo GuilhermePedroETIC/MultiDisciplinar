@@ -127,6 +127,8 @@ public class IaCharacther : MonoBehaviour, IDemageble
                         }
 
                         agent.SetDestination(currentTarget.position);
+                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(-dir.x, -dir.y, -dir.z));
+                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
                     }
                     agent.isStopped = false;
                     isAttacking = false;

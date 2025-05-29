@@ -5,9 +5,12 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private TypeOfWeapon typeOfWeapon;
-    // private GameObject weaponHandler;
     [SerializeField] private Arrow arrowPreFab;
-    [SerializeField] private BulletWizard bulletWizardPreFab; 
+    [SerializeField] private BulletWizard bulletWizardPreFab;
+    [SerializeField] private grenade grenadePreFab;
+    [SerializeField] private BulletRifle bulletRiflePreFab;
+
+
     private IaCharacther iaCharacther;
 
     private void Awake()
@@ -45,6 +48,34 @@ public class Weapon : MonoBehaviour
                 StopWand();             
             }
         }
+        if (typeOfWeapon == TypeOfWeapon.Grenade)
+        {
+            if (iaCharacther.IsAttacking == true)
+            {
+                if (!IsInvoking("MakingGrenade"))
+                {
+                    ShootGrenade();
+                }
+            }
+            else if (iaCharacther.IsAttacking == false)
+            {
+                StopGrenade();
+            }
+        }
+        if (typeOfWeapon == TypeOfWeapon.Rifle)
+        {
+            if (iaCharacther.IsAttacking == true)
+            {
+                if (!IsInvoking("MakingBulletRifle"))
+                {
+                    ShootBulletRifle();
+                }
+            }
+            else if (iaCharacther.IsAttacking == false)
+            {
+                StopBulletRifle();
+            }
+        }
         else if (typeOfWeapon == TypeOfWeapon.None)
         {
             CancelInvoke("ShootArrow");
@@ -63,6 +94,18 @@ public class Weapon : MonoBehaviour
     {
         BulletWizard bullet = Instantiate(bulletWizardPreFab, transform.position, Quaternion.identity);
         bullet.SetDirection(transform.forward);
+    }
+    private void MakingGrenade()
+    {
+        Quaternion offset = Quaternion.Euler(0, -90, 90);
+        Quaternion newRot = transform.rotation * offset;
+        grenade bullet = Instantiate(grenadePreFab, transform.position, newRot);
+    }
+    private void MakingBulletRifle()
+    {
+        Quaternion offset = Quaternion.Euler(0, -90, 90);
+        Quaternion newRot = transform.rotation * offset;
+        BulletRifle bullet = Instantiate(bulletRiflePreFab, transform.position, newRot);
     }
 
     private void ShootArrow()
@@ -83,10 +126,29 @@ public class Weapon : MonoBehaviour
     {
         CancelInvoke("MakingWand");
     }
+
+    private void ShootGrenade()
+    {
+        InvokeRepeating("MakingGrenade", 2, 2);
+    }
+    private void StopGrenade()
+    {
+        CancelInvoke("MakingGranade");
+    }
+    private void ShootBulletRifle()
+    {
+        InvokeRepeating("MakingBulletRifle", 1, 1);
+    }
+    private void StopBulletRifle()
+    {
+        CancelInvoke("MakingBulletRifle");
+    }
     private enum TypeOfWeapon
     {
         None,
         Bow,
-        Wand
+        Wand,
+        Grenade,
+        Rifle
     }
 }

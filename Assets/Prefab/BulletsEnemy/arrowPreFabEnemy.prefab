@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b3af7b88ba54da34f973cffebfbe33f5, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8008938560075343895, guid: b3af7b88ba54da34f973cffebfbe33f5, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -308,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc136d7875fd5bd4aa3423f7593cb0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreLayerName: Enemy
+  ignoreTagName: Enemy
 --- !u!54 &3654334214633236357
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316,10 +320,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8542387183636031567}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
